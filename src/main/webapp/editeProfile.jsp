@@ -39,7 +39,7 @@
         <input type="password" name="password" class="w-full p-2 border rounded-lg mb-3" value="<%= user.getPassword()%>" required>
 
         <label class="block mb-2 font-medium">Contact Number</label>
-        <input type="tel" name="contactNumber" class="w-full p-2 border rounded-lg mb-3" value="<%=user.getcontactNumber()%>"required>
+        <input type="tel" name="contactNumber" class="w-full p-2 border rounded-lg mb-3" value="<%=user.getContactNumber()%>" required>
 
         <label class="block mb-2 font-medium">Address</label>
         <input type="text" name="address" class="w-full p-2 border rounded-lg mb-3"value="<%=user.getAddress()%>" required>

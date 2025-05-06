@@ -22,8 +22,6 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-
-
         User user = UsersManagers.getUserByLogin(email, password);
 
         if (user == null) {
@@ -34,8 +32,13 @@ public class LoginServlet extends HttpServlet {
             out.println("</body></html>");
             return;
         }
+        if ("Male".equalsIgnoreCase(user.getGender())) {
+            user.setImagePath("images/image5.jpg");
+        } else {
+            user.setImagePath("images/image6.jpg");
+        }
 
-        // If login fails
+        // If login success
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
         request.getRequestDispatcher("userProfile.jsp").forward(request, response);

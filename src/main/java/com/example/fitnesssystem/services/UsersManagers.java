@@ -70,14 +70,14 @@ public class UsersManagers {
     }
     public static void updateUser(int id, String name, String password, String email,  int age,  String gender,
                                   String contactNumber, String address, double weight, double height){
-        User user=getUserId(id);
+        User user = getUserId(id);
         if(user!=null){
             user.setName(name);
             user.setPassword(password);
             user.setEmail(email);
             user.setAge(age);
             user.setGender(gender);
-            user.setcontactNumber(contactNumber);
+            user.setContactNumber(contactNumber);
             user.setAddress(address);
             user.setWeight(weight);
             user.setHeight(height);

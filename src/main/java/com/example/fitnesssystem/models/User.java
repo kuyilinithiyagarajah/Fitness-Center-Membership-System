@@ -7,6 +7,7 @@ public class User extends Admin {
     private String address;
     private double weight;
     private double height;
+    private String imagePath;
 
     public User(int id, String name, String password, String email,  int age,  String gender,
                 String contactNumber, String address, double weight, double height) {
@@ -29,11 +30,11 @@ public class User extends Admin {
 
 
 
-    public String getcontactNumber() {
+    public String getContactNumber() {
         return contactNumber;
     }
 
-    public void setcontactNumber(String number) {
+    public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 
@@ -68,6 +69,10 @@ public class User extends Admin {
     public void setHeight(double height) {
         this.height = height;
     }
+
+    public String getImagePath() {return imagePath;}
+    public void setImagePath(String imagePath) {this.imagePath = imagePath;}
+
 
     @Override
     public String toString(){
