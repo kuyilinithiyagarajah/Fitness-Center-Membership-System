@@ -1,7 +1,6 @@
 package com.example.fitnesssystem.servlets;
 
-import com.example.fitnesssystem.models.User;
-import com.example.fitnesssystem.services.UsersManagers;
+import com.example.fitnesssystem.services.UserManagers;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,13 +25,13 @@ public class RegisterUserServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         int age = Integer.parseInt(request.getParameter("age"));
 
-        UsersManagers.readUsers();
-        UsersManagers.addNewUser( name, password,  email, age,  gender,  contactNumber,  address,  weight, height);
+        UserManagers.readUsers();
+        UserManagers.addNewUser( name, password,  email, age,  gender,  contactNumber,  address,  weight, height);
 
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         out.println("<h1 style=''>User registered successfully</h1>");
-        out.println("<a href='index.jsp'>Go to Login</a>");
+        out.println("<a href='login.jsp'>Go to Login</a>");
         out.println("</body></html>");
 
 
