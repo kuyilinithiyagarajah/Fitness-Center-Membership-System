@@ -44,4 +44,8 @@ public class Payment {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public String toString(){
+        return id + "," + userID + "," + paymentDate + "," + amount + "\n";
+    }
 }
