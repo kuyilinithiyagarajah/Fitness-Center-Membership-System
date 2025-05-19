@@ -1,35 +1,35 @@
 package com.example.fitnesssystem.servlets;
 
+import com.example.fitnesssystem.models.MemberShip;
 import com.example.fitnesssystem.models.Plan;
 import com.example.fitnesssystem.services.MemberShipManagers;
 import com.example.fitnesssystem.services.PaymentManagers;
 import com.example.fitnesssystem.services.PlanManagers;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
-@WebServlet("/BuyMembershipServlet")
-public class BuyMembershipServlet extends HttpServlet {
-
+@WebServlet(name = "MembershipRenewalRequest", value = "/request-renewal")
+public class MembershipRenewalRequest extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PlanManagers.readPlans();
-        try {
-            int userID = Integer.parseInt(request.getParameter("userID"));
-            int planID = Integer.parseInt(request.getParameter("planID"));
-            String startDateStr = request.getParameter("startDate");
-            String durationStr = request.getParameter("duration"); // e.g., "1month", "3months"
 
-            // Convert start date
+        try {
+            int membershipId = Integer.parseInt(request.getParameter("membershipID"));
+            String startDateStr = request.getParameter("startDate");
+            String durationStr = request.getParameter("duration");
+            int userID = Integer.parseInt(request.getParameter("userID"));
+
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date startDate = sdf.parse(startDateStr);
 
@@ -55,7 +55,8 @@ public class BuyMembershipServlet extends HttpServlet {
             }
             Date expireDate = cal.getTime();
 
-            Plan selectedPlan = PlanManagers.findPlan(planID);
+            MemberShip memberShip = MemberShipManagers.findMemberShip(membershipId);
+            Plan selectedPlan = PlanManagers.findPlan(memberShip.getPlanID());
 
             double price = 0;
             if (selectedPlan != null) {
@@ -75,26 +76,17 @@ public class BuyMembershipServlet extends HttpServlet {
                 }
             }
 
-            HttpSession session = request.getSession();
-            session.setAttribute("planName", selectedPlan.getPlanName());
-            session.setAttribute("price", price);
-            session.setAttribute("startDate", startDateStr);
-            session.setAttribute("duration", durationStr);
-
             String currentDate = LocalDate.now().toString();
-            // Create membership
-            MemberShipManagers.createMemberShip(userID, planID, startDate, expireDate, "Active", currentDate);
-
+            MemberShipManagers.renewalRequest(membershipId, startDate, expireDate, currentDate);
             String paymentDate = LocalDate.now().toString();
             PaymentManagers.addPayment(userID, paymentDate, price);
 
-            // Redirect to success page
-            response.sendRedirect("membershipSuccess.jsp");
-
-        } catch (Exception e) {
-            PrintWriter  out = response.getWriter();
-            out.write("Something went wrong");
-            out.close();
+            response.sendRedirect("currentMembership.jsp");
         }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
+
