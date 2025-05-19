@@ -9,6 +9,7 @@ public class FileHandler {
         File file = new File(fileName);
         return file.exists();
     }
+
     public static void createFile(String fileName){
         File file = new File(fileName);
         try{
@@ -18,6 +19,7 @@ public class FileHandler {
             e.printStackTrace();
         }
     }
+
     public static void writeToFile(String fileName,boolean append, String data){
         if(!isFileExist(fileName)){
             createFile(fileName);
@@ -41,8 +43,14 @@ public class FileHandler {
             FileReader fileReader = new FileReader(filename);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = "";
-            while ((line = bufferedReader.readLine()) != null) {
-                data += line + "\n";
+            while (true){
+                line = bufferedReader.readLine();
+                if (line == null) {
+                    break;
+                }
+                else{
+                    data = data + line + "\n";
+                }
             }
             bufferedReader.close();
         } catch (Exception e) {
