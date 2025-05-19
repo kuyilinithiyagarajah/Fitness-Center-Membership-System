@@ -1,6 +1,6 @@
 package com.example.fitnesssystem.servlets;
 
-import com.example.fitnesssystem.services.UsersManagers;
+import com.example.fitnesssystem.services.UserManagers;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,8 +14,8 @@ public class UnregisterUser extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int userID = Integer.parseInt(request.getParameter("user-id"));
 
-        UsersManagers.deleteUser(userID);
+        UserManagers.deleteUser(userID);
 
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("login.jsp");
     }
 }
