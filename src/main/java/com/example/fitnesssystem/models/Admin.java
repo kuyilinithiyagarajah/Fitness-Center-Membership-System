@@ -45,4 +45,20 @@ public class Admin {
         this.email = email;
     }
 
+    public void displaydDetails() {
+        System.out.println(" ID" + id);
+        System.out.println(" Name" + name);
+        System.out.println(" Password" + password);
+        System.out.println(" Email" + email);
+
+    }
+
+    public String toString() {
+        return "ID: " + id + " Name: " + name + " Password: " + password + " Email: " + email;
+    }
+
+
+    public int getID() {
+        return id;
+    }
 }
