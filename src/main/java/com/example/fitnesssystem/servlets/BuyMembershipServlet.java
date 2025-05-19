@@ -22,8 +22,10 @@ public class BuyMembershipServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PlanManagers.readPlans();
         try {
+            PlanManagers.readPlans();
+            PaymentManagers.readPayments();
+
             int userID = Integer.parseInt(request.getParameter("userID"));
             int planID = Integer.parseInt(request.getParameter("planID"));
             String startDateStr = request.getParameter("startDate");
@@ -92,6 +94,7 @@ public class BuyMembershipServlet extends HttpServlet {
             response.sendRedirect("membershipSuccess.jsp");
 
         } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
             PrintWriter  out = response.getWriter();
             out.write("Something went wrong");
             out.close();
