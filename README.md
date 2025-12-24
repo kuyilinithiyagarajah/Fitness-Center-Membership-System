@@ -19,3 +19,16 @@ The application is built using Java, JavaFX, and Object-Oriented Programming pri
 - Data Structures: Queue, Insertion Sort
 - File I/O
 - MVC architecture
+
+## My Contributions
+
+### Admin Details Management Module
+- Developed the Admin Details Management module to handle administrative functions
+- Implemented CRUD operations:
+  - **Create**: Add new admin users
+  - **Read**: View existing admin user details
+  - **Update**: Edit admin information
+  - **Delete**: Remove admin users
+- Ensured system security and data integrity for admin accounts
+- Designed user interfaces for admin operations (screenshots included in `Documents/Contribution_Report`)
+- Contribution details documented in [`Contribution_Report.pdf`](Documents/Contribution_Report.pdf)
